@@ -92,9 +92,9 @@ public class Operators {
         int x2 = (int)1.0;
         short y2 = (short)1921222;
         System.out.println(2147483647 + 1);
-//        long y2 = (x2 = 3); // prints error
+//        long y2 = (x2 = 3); // prints error, we already defined y2
         boolean a1 = false;
-        boolean b1 = (a1 = true);
+//        boolean b1 = (y2 = true); print error, y2 is long, not boolean
         System.out.println("x2 = " + x2);
 
         /**
