@@ -92,7 +92,7 @@ public class Operators {
         int x2 = (int)1.0;
         short y2 = (short)1921222;
         System.out.println(2147483647 + 1);
-        long z2 = (x2 = 3);
+//        long y2 = (x2 = 3); // prints error
         boolean a1 = false;
         boolean b1 = (a1 = true);
         System.out.println("x2 = " + x2);
