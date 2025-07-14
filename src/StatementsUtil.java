@@ -166,7 +166,7 @@ public class StatementsUtil {
      */
 
     public static void nahanjTariCheck(int nahanjTari) {
-        if ((nahanjTari % 4 == 0) && (nahanjTari % 100 != 0)) {
+        if ((nahanjTari % 4 == 0) && (nahanjTari % 100 != 0) || (nahanjTari % 400 == 0)) {
             System.out.println(nahanjTari + " is nahanj tari");
         }
         else {
