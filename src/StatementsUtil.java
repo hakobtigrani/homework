@@ -162,7 +162,7 @@ public class StatementsUtil {
     }
 
     /**
-     * 8․ Գրե՛ք method, որը ստուգում է տրված տարին համարվում է արդյոք նահանջ։
+     * 8․ Գրե՛ք method, որը ստուգում է տրված տարին համարվում է արդյոք  նահանջ։
      */
 
     public static void nahanjTariCheck(int nahanjTari) {
