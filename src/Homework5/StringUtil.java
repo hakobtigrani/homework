@@ -51,7 +51,7 @@ public class StringUtil {
     /**
      * Combines the given number and strings.
      * “1” , 2 , “hello”
-     * @return
+     * @return Combines
      */
     public String h1h2() {
         return "1" + 2 + "hello";
