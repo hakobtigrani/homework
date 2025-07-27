@@ -1,7 +1,5 @@
-package Homework6;
+package homework6;
 
-import javax.swing.event.InternalFrameEvent;
-import java.sql.PreparedStatement;
 import java.util.*;
 
 public class ArrayUtil {
@@ -240,11 +238,12 @@ public class ArrayUtil {
      * @param notRepeating
      */
     public static void NotRepeating(int[] notRepeating) {
-        Set<List<Integer>> uniqueTriplets = new HashSet<>();
-        int n = notRepeating.length;
 
         System.out.println("8:");
         System.out.println();
+
+        Set<List<Integer>> uniqueTriplets = new HashSet<>();
+        int n = notRepeating.length;
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
@@ -494,6 +493,4 @@ public class ArrayUtil {
         }
         System.out.println("YES");
     }
-
-
 }

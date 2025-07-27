@@ -1,4 +1,4 @@
-package Homework2.store;
+package homework2.store;
 
 public class author {
 }

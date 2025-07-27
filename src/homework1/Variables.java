@@ -1,6 +1,4 @@
-package Homework1;
-
-import com.sun.jdi.ByteValue;
+package homework1;
 
 public class Variables {
 

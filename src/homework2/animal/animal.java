@@ -1,4 +1,4 @@
-package Homework2.animal;
+package homework2.animal;
 
 public class animal{
 }

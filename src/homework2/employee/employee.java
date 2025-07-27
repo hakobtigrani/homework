@@ -1,4 +1,4 @@
-package Homework2.employee;
+package homework2.employee;
 
 public class employee {
     int id;
