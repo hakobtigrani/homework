@@ -1,11 +1,6 @@
 package homework7;
 
-import jdk.jshell.execution.LoaderDelegate;
-
 import java.time.*;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class time {
