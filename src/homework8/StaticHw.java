@@ -229,11 +229,8 @@ public class StaticHw {
                     result += ch;
                 }
             }
-
             return result;
-
         }
-
     }
 
     public class WorkIt {
@@ -257,7 +254,6 @@ public class StaticHw {
             }
             return result;
         }
-
     }
 
     // 7. Create a class with a static method that recursively calculates the factorial of a given integer.
