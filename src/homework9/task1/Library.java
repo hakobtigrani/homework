@@ -1,4 +1,4 @@
-package homework9.one;
+package homework9.task1;
 
 public class Library {
     protected String libraryName;

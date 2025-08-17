@@ -1,4 +1,4 @@
-package homework9.two;
+package homework9.task2;
 
 public class Run {
 
