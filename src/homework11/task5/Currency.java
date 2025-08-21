@@ -21,6 +21,7 @@ public enum Currency {
         return country;
     }
 
+    @Override
     public String toString () {
         return this.name() + " - " + country;
     }
