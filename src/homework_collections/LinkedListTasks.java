@@ -1,9 +1,6 @@
 package homework_collections;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 public class LinkedListTasks {
     public static void main(String[] args) {
@@ -22,6 +19,12 @@ public class LinkedListTasks {
         // 3
         boolean isPal = isPalindrome(originalList);
         System.out.println("\n3: " + isPal);
+
+        // 4
+        LinkedHashSet<String> noDupes = new LinkedHashSet<>(originalList);
+        originalList.clear();
+        originalList.addAll(noDupes);
+        System.out.println("\n4: " + noDupes);
     }
 
     public static String findMiddle(LinkedList<String> list) {
