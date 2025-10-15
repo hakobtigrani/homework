@@ -2,7 +2,7 @@ package homework_collections;
 
 import java.util.*;
 
-public class ListUtils {
+public class ArrayListTasks {
     public static void main(String[] args) {
         List<Integer> originalList = new ArrayList<>(Arrays.asList(1, 5, 58, 0, 58, 75, 23, 75, 100));
         System.out.println("Original List: " + originalList);
