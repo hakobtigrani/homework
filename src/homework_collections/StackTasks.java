@@ -2,7 +2,7 @@ package homework_collections;
 
 import java.util.Stack;
 
-public class StackExample {
+public class StackTasks {
     public static void main(String[] args) {
         System.out.println(isBalanced("{[()]}"));
         System.out.println(isBalanced("{[(])}"));
