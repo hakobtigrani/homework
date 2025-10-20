@@ -1,8 +1,8 @@
-package Implement;
+package homework_implements;
 
 import java.util.*;
 
-public class MyArrayList implements List<Integer> {
+public class MyArrayList<E> implements List<E> { // <--- Changed to generic type E
 
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ELEMENT_DATA = {};
@@ -62,7 +62,7 @@ public class MyArrayList implements List<Integer> {
      * @return an iterator over the elements in this list in proper sequence.
      */
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<E> iterator() { // <--- Generic E
         return new Itr();
     }
 
@@ -77,8 +77,8 @@ public class MyArrayList implements List<Integer> {
     /**
      * Returns an array containing all the elements in this list in proper sequence.
      * @param a the array into which the elements of this list are to
-     *          be stored, if it is big enough; otherwise, a new array of the
-     *          same runtime type is allocated for this purpose.
+     * be stored, if it is big enough; otherwise, a new array of the
+     * same runtime type is allocated for this purpose.
      * @return an array containing the elements of the list
      * @param <T>
      */
@@ -95,16 +95,16 @@ public class MyArrayList implements List<Integer> {
 
     /**
      * Appends the specified element to the end of this list.
-     * @param integer element whose presence in this collection is to be ensured
+     * @param element element whose presence in this collection is to be ensured
      * @return {@code true}
      */
     @Override
-    public boolean add(Integer integer) {
+    public boolean add(E element) { // <--- Generic E
         modCount++;
         if (size == elementData.length) {
             elementData = grow();
         }
-        elementData[size] = integer;
+        elementData[size] = element;
         size++;
         return true;
     }
@@ -121,7 +121,8 @@ public class MyArrayList implements List<Integer> {
         if (oldCapacity == 0 && elementData == DEFAULT_CAP_EED) {
             return elementData = new Object[DEFAULT_CAPACITY];
         }
-        int newCapacity = (int) (oldCapacity * 1.5);
+        // Original was oldCapacity * 1.5, using bit shift for optimization/style
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
         return elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
@@ -150,7 +151,7 @@ public class MyArrayList implements List<Integer> {
     private void fastRemove(int index) {
         modCount++;
         int numMoved = size - index - 1;
-        if (numMoved == 0) {
+        if (numMoved > 0) { // Changed == 0 to > 0 to match standard ArrayList behavior
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         }
         elementData[--size] = null;
@@ -179,7 +180,7 @@ public class MyArrayList implements List<Integer> {
      * @return {@code true} if this list changed as a result of the call.
      */
     @Override
-    public boolean addAll(Collection<? extends Integer> c) {
+    public boolean addAll(Collection<? extends E> c) { // <--- Generic E
         Object[] a = c.toArray();
         int numNew = a.length;
         if (numNew == 0) {
@@ -209,13 +210,13 @@ public class MyArrayList implements List<Integer> {
      * Inserts all the elements in the specified collection into this
      * list at the specified position.
      * @param index index at which to insert the first element from the
-     *              specified collection
+     * specified collection
      * @param c collection containing elements to be added to this list
      * @return {@code true} if this list changed as a result of the call.
      * @throws IndexOutOfBoundsException
      */
     @Override
-    public boolean addAll(int index, Collection<? extends Integer> c) {
+    public boolean addAll(int index, Collection<? extends E> c) { // <--- Generic E
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
@@ -312,11 +313,12 @@ public class MyArrayList implements List<Integer> {
      * @return the element at the specified position in this list.
      */
     @Override
-    public Integer get(int index) {
+    @SuppressWarnings("unchecked")
+    public E get(int index) { // <--- Generic E
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        return (Integer) elementData[index];
+        return (E) elementData[index]; // <--- Cast to E
     }
 
     /**
@@ -327,11 +329,12 @@ public class MyArrayList implements List<Integer> {
      * @return the element previously at the specified position.
      */
     @Override
-    public Integer set(int index, Integer element) {
+    @SuppressWarnings("unchecked")
+    public E set(int index, E element) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        Integer oldValue = (Integer) elementData[index];
+        E oldValue = (E) elementData[index];
         elementData[index] = element;
         return oldValue;
     }
@@ -344,7 +347,7 @@ public class MyArrayList implements List<Integer> {
      * @param element element to be inserted
      */
     @Override
-    public void add(int index, Integer element) {
+    public void add(int index, E element) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
@@ -364,12 +367,13 @@ public class MyArrayList implements List<Integer> {
      * @return the element that was removed from the list.
      */
     @Override
-    public Integer remove(int index) {
+    @SuppressWarnings("unchecked")
+    public E remove(int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         modCount++;
-        Integer oldValue = (Integer) elementData[index];
+        E oldValue = (E) elementData[index];
         int numMoved = size - index - 1;
         if (numMoved > 0) {
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
@@ -401,25 +405,44 @@ public class MyArrayList implements List<Integer> {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        return lastIndexOfRange(o, size - 1);
+    }
+
+    int lastIndexOfRange(Object o, int start) {
+        Object[] es = elementData;
+        if (o == null) {
+            for (int i = start; i >= 0; i--) {
+                if (es[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = start; i >= 0; i--) {
+                if (o.equals(es[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
-    public ListIterator<Integer> listIterator() {
+    public ListIterator<E> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator<Integer> listIterator(int index) {
+    public ListIterator<E> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List<Integer> subList(int fromIndex, int toIndex) {
+    public List<E> subList(int fromIndex, int toIndex) {
+
         return List.of();
     }
 
-    private class Itr implements Iterator<Integer> {
+    private class Itr implements Iterator<E> {
         int cursor = 0;
         int expectedModCount = modCount;
 
@@ -433,14 +456,15 @@ public class MyArrayList implements List<Integer> {
         /**
          * @return the next element.
          */
-        public Integer next() {
+        @SuppressWarnings("unchecked")
+        public E next() {
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            Integer element = (Integer) elementData[cursor];
+            E element = (E) elementData[cursor];
             cursor++;
             return element;
         }
