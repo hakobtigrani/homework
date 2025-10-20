@@ -84,7 +84,7 @@ public class PhoneBookApp {
 
     private static void searchForContact() {
         System.out.println("Search by: ");
-        String searchBy = scanner.nextLine().trim();
+        String searchBy = scanner.nextLine().trim().toLowerCase();
         boolean found = false;
 
         if (charCheck(searchBy)) {
